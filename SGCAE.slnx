@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="SGCAE.Application/SGCAE.Application.csproj" />
+    <Project Path="SGCAE.Domain/SGCAE.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="SGCAE.Persistence/SGCAE.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/Presenters/">
+    <Project Path="SGCAE.Api/SGCAE.Api.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="SGCAE.Tests/SGCAE.Tests.csproj" />
+  </Folder>
+</Solution>
