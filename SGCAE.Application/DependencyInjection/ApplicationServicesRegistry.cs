@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using SGCAE.Application.Features.Employees.Commands.CreateEmployee;
+using SGCAE.Application.Features.Employees.Queries.GetEmployeeById;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SGCAE.Application.DependencyInjection;
 
@@ -18,6 +19,10 @@ public static class ApplicationServicesRegistry
 
         // Registrar el caso de uso de empleados
         services.AddScoped<CreateEmployeeUseCase>();
+
+        // Query: consultar empleado por ID
+        services.AddScoped<GetEmployeeByIdUseCase>();
+
 
         return services;
     }
