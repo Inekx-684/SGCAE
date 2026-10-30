@@ -1,24 +1,35 @@
 
+using SGCAE.Application.DependencyInjection;
+using SGCAE.Persistence.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Registrar servicios para los controladores
+// Registrar controladores REST
 builder.Services.AddControllers();
 
-// Habilitar documentación OpenAPI
+// Registrar documentación OpenAPI
 builder.Services.AddOpenApi();
+
+// Registrar servicios de Application
+builder.Services.AddApplicationServices();
+
+// Registrar servicios de Persistence
+builder.Services.AddPersistenceServices(
+    builder.Configuration);
 
 var app = builder.Build();
 
-// Exponer OpenAPI en desarrollo
+// Habilitar OpenAPI en desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// Redirigir HTTP a HTTPS
+// Redireccionar a HTTPS
 app.UseHttpsRedirection();
 
-// Habilitar los endpoints de los controladores
+// Habilitar controladores REST
 app.MapControllers();
 
+// Iniciar aplicación
 app.Run();

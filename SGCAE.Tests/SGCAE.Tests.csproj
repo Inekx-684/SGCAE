@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SGCAE.Application\SGCAE.Application.csproj" />
     <ProjectReference Include="..\SGCAE.Domain\SGCAE.Domain.csproj" />
   </ItemGroup>
 
