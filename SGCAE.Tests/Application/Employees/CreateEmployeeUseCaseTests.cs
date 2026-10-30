@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using FluentValidation;
@@ -18,6 +18,16 @@ public class CreateEmployeeUseCaseTests
         : IEmployeesRepository
     {
         public List<Employee> Employees { get; } = new();
+
+        public Task<(IReadOnlyList<Employee> Items, int Total)> GetPagedAsync(
+            int page, int pageSize, string? search, bool? isActive, CancellationToken cancellationToken = default)
+        {
+            IEnumerable<Employee> filtered = Employees;
+            if (isActive.HasValue) filtered = filtered.Where(x => x.IsActive == isActive.Value);
+            if (!string.IsNullOrWhiteSpace(search)) filtered = filtered.Where(x => x.Identification.Contains(search) || x.FirstName.Contains(search));
+            var list = filtered.ToList();
+            return Task.FromResult(((IReadOnlyList<Employee>)list.Skip((page - 1) * pageSize).Take(pageSize).ToList(), list.Count));
+        }
 
         public Task AddAsync(
             Employee employee,

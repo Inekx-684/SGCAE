@@ -1,4 +1,6 @@
-﻿using System;
+using SGCAE.Persistence.Repositories.AccessRecords;
+using SGCAE.Persistence.Repositories.AccessPoints;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +10,7 @@ using SGCAE.Application.Interfaces.Persistence;
 using SGCAE.Application.Interfaces.Repositories;
 using SGCAE.Persistence.Context;
 using SGCAE.Persistence.Repositories.Employees;
+using SGCAE.Persistence.Repositories.Credentials;
 
 namespace SGCAE.Persistence.DependencyInjection;
 
@@ -30,6 +33,10 @@ public static class PersistenceServicesRegistry
             options.UseSqlServer(connectionString));
 
         services.AddScoped<IEmployeesRepository, EmployeesRepository>();
+        services.AddScoped<ICredentialsRepository, CredentialsRepository>();
+
+        services.AddScoped<IAccessPointsRepository, AccessPointsRepository>();
+        services.AddScoped<IAccessRecordsRepository, AccessRecordsRepository>();
 
         services.AddScoped<IUnitOfWork,
             SGCAE.Persistence.UnitOfWork.UnitOfWork>();
